@@ -1,15 +1,33 @@
 <html>
     <head>
+        <script>
+        function validateForm() {
+            var x = document.getElementById("cpd").value;
+            var y = document.getElementById("pd").value;
+            if (x != y) {
+                document.getElementById("cpwd").style.color= "red";
+                document.getElementById("cpwd").style.fontSize= "small";
+                document.getElementById("cpwd").innerHTML="The password you entered do not match";
+                return false;
+            }
+            else 
+            {    document.getElementById("cpwd").innerHTML="";
+                return true;
+            }
+        }
+        </script>
         <title>Signup Page</title>
         <style>
             body{
                 font-family: Arial, Helvetica, sans-serif;
                 background-color: rgb(225, 216, 216);
-                padding-top: 100px;
+                padding-top: 40px;
+                padding-left: 550px;
+                padding-right: 550px;
             }
             button{
                 background-color: #c81b1b;
-                width: 20%;
+                width: 100%;
                 padding: 15px;
                 color: white;
                 border: none;
@@ -20,13 +38,12 @@
                 font-size: 20px;
             }
             form{
-                width: 40%;
                 border: none;
             }
             input[type=email],input[type=text]{
-                width: 50%;
+                width: 100%;
                 font-size: 15px;
-                margin: 10px 0px;
+                margin: 8px 0px;
                 padding: 12px 20px;
                 display: inline-block;
                 border: 2px solid #c81b1b;
@@ -34,9 +51,12 @@
             }
             button:hover{
                 opacity:0.7;
-
             }
             .container{
+                padding-top: 20px;
+                padding-left: 50px;
+                padding-right: 50px;
+                padding-bottom: 50px;
                 background-color: white;
             }
         </style>
@@ -45,15 +65,17 @@
         <center><form action="#" method="post">
             {% csrf_token %}
             <div class="container">
-                <h1><br>Authentication System </h1>
-                <label for='first_name'></label>
-		        <input type='text' placeholder="Username" name='first_name' required><br>
-            	<label for ='email'></label>
-            	<input type="email" placeholder="E-mail address" name="email" required><br>  
+                <h1>Authentication System </h1>
+                <label for='name'></label>
+		        <input type='text' placeholder="Username" name='name' required><br>
             	<label for='password'></label>
-            	<input type="text" placeholder="Password" name="password" required><br> 
+            	<input type="text" id="pd" placeholder="Password" name="password" required>
+                <span id="pwd"></span>
                 <label for='cnfmpwrd'></label>
-            	<input type="text" placeholder="Confirm Password" name="cnfmpwrd" required><br>  
+            	<input type="text" id="cpd" placeholder="Confirm Password" name="cnfmpwrd" onblur="validateForm();" required>
+                <span id="cpwd"></span>
+                <label for ='email'></label>
+            	<input type="email" placeholder="E-mail address" name="email" required><br>  
             	<button type="submit"><b>Signup</b></button><br><br>     
             	Have an account? <a href="http://localhost:8000/login/"> Sign In </a>
             </div>
